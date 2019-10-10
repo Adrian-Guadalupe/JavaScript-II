@@ -86,7 +86,10 @@ console.log(firstNamesAllCaps);
 
 // ==== Challenge 3: Use .filter() ====
 // The large shirts won't be available for the event due to an ordering issue. We need a filtered version of the runners array, containing only those runners with large sized shirts so they can choose a different size. This will be an array of objects.
-let runnersLargeSizeShirt = [];
+let runnersLargeSizeShirt = runners.filter((athlete) => {
+  return athlete.shirt_size == 'L'
+});
+
 console.log(runnersLargeSizeShirt);
 
 
@@ -95,14 +98,48 @@ console.log(runnersLargeSizeShirt);
 
 // ==== Challenge 4: Use .reduce() ====
 // The donations need to be tallied up and reported for tax purposes. Add up all the donations and save the total into a ticketPriceTotal variable.
-let ticketPriceTotal = 0;
+let ticketPriceTotal = runners.reduce((amnt, athlete) => {
+  return amnt += athlete.donation;
+}, 0);
+
 console.log(ticketPriceTotal);
+
+
+
+
+
 
 // ==== Challenge 5: Be Creative ====
 // Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
-// Problem 1
+// Problem 1- The Boss wants to send special thank-you-gifts to those athletes that brought in the big bucks. Using .filter(), create a new array of runners who brought in over $250.
 
-// Problem 2
+let bigMoney = runners.filter((athlete) => {
+  return athlete.donation >= 250;
+});
 
-// Problem 3
+console.log(bigMoney);
+console.log(bigMoney.length);
+
+
+
+
+// Problem 2- The Boss wants to send out personalized participation confirmation emails. He needs a new array showing only first names & email addresses. Use .map().
+let thankYou = runners.map((info) => {
+  return {'first_name': info.first_name, 'email': info.email};
+});
+
+console.log(thankYou);
+
+
+
+
+
+// Problem 3- The company has a business deal with skinix to incentivise skinix employees to participate. Retrieve those skinix emloyees who participated into a new array, so they can receive their incentives, using .filter().
+
+let incentive = runners.filter((athlete) => {
+  return athlete.company_name == 'Skinix';
+});
+
+console.log(incentive);
+console.log(incentive.length);
